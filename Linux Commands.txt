@@ -1,0 +1,140 @@
+sudo poweroff
+sudo reboot
+
+---------- Processos
+ps -> Todos os processos que estao sendo excutados no terminal
+ps -e -> Todos os processos que estao sendo excutados no sistema
+ps -ef -> Todos os processos que estao sendo excutados no sistema detalhado
+ps -e -o pid -> (-o de output,(pid de id do processo, comm de comando, size de tamanho) -> especifica que o retorno ira exibir somente o que vier depois do -o
+ps -e --sort -size -> ordena pelo da memoria consumida
+ps -p NUMERO_DO_PROCESSO ->-p de PID
+ps -e -o pid --sort -size | head -n 11 | grep [0-9] -> recupera o PID dos 10 primeiros process ordenados pela ordem descrescente de memoria
+ps -p $ID_DO_PROCESSO -o comm= -> recupera o nome do processo a partir do ID
+
+
+kill ID DO PROCESSO -> mata um processo especifico
+kill -9 ID DO PROCESSO -> mata um processo especifico porem forçando o kill
+killall -9 NOME DO PROCESSO -> mata todos os processos que contem o nome informado
+| grep CONTEUDO -> Filtra o retorno de uma busca ou o conteudo de um texto
+(ps -ef | grep usr) -> todos os processos filtrados por usr
+top -> mostra os processos em real time
+bg firefox -> executa o firefox no background
+fb firefox -> executa o firefox no foreground
+firefox & -> executa o firefox direto no background
+pstree -> mostra a arvore de execucao dos processos
+jobs -> lista todos os processos
+
+----- Permissoes -----
+r -> leitura
+w -> escrita
+x -> execucao
+
+u -> user
+o -> others
+g -> group
+
+sudo chmod +x NOME DO ARQUIVO -> altera a permissao de um arquivo adicionando x
+sudo chmod -x NOME DO ARQUIVO -> altera a permissao de um arquivo removendo x
+sudo chmod u--xrw NOME DO USUARIO -> remove a permissao de usuario do USUARIO INFORMADO (++xrw)
+sudo chmod o--xrw NOME DO USUARIO -> remove a permissao de outros do USUARIO INFORMADO (++xrw)
+sudo chmod g--xrw NOME DO USUARIO -> remove a permissao de grupo do USUARIO INFORMADO (++xrw)
+sudo chmod u=rw,g=rw,o=rw agenda
+sudo addgroup NOME_DO_GRUPO
+sudo chgrp NOME_DO_GRUPO NOME_DO_ARQUIVO
+sudo chown NOME_DO_USUARIO NOME_DO_ARQUIVO
+
+** Para executar um shell, precisa ter permissao de execucao -> alterar para chmod +x NOME DO ARQUIVO
+
+------
+locate UM NOME -> procura pelo nome do arquivo em todo o hd
+updatedb -> força a atualizacao do banco de dados do linux para atualizar as informações dos files etc (precisa ser super admin -sudo)
+which NOME -> mostra o caminho onde esta o NOME procurado
+
+------ Usuarios | Grupos
+sudo passwd -> altera/cria uma senha para o usuario root
+sudo addgroup NOME DO GRUPO
+sudo addgroup NOME_DO_USUARIO NOME_DO_GRUPO ->adiciona o usuario num grupo
+sudu adduser -> adiciona um novo usuario (pode adicionar este usuario a um diferente grupo)
+su NOME DO USUARIO -> troca de usuario
+su -> mesma coisa que su root - vai para o usuario root
+
+------ Variaveis de ambiente
+env -> mostra todas as variaveis de ambiente ( umas variavel de ambiente é separa por : )
+variavel de ambiente PATH -> PATH = $PATH:/NOME DE ALGUM DIRETORIO
+.bashrc -> onde fica armazenado o que vai ser executado quando o terminal for aberto (se quiser que quando o terminal seja aberto a variavel esteja atualizada, precisa adicionar aqui)
+ls -la ~/ | more -> força uma pesquisa
+vi ~/.bashrc -> edita o .bashrc
+
+------ Gerenciar programas 
+sudo apt-get update -> atualiza a lista de programas disponiveis com as versoes mais recentes
+apt-cache search NOME DO PROGRAMA PARA INSTALAR -> procura o programa que se deseja instalar -> eh retornado uma lista se achar mais de uma
+sudo apt-get install NOME DO PROGRAMA PARA INSTALAR -> instala um programa especifico -> para instalar precisa ser o usuario root (sudo)
+sudo apt-get remove NOME DO PROGRAMA PARA DESINSTALAR -> remove um programa especifco -> para desinstalar precisa ser o usuario root (sudo)
+
+*** para instalar programar baixados da internet (sem ser do repositorio) a extensao eh .deb
+sudo dpkg -i NOME DO PROGRAMA -> precisa ser root (sudo) -> -i significa install
+sudo dpkg -r NOME DO PROGRAMA -> precisa ser root (sudo) -> -r significa remove
+sudo apt-get -f install -> resolve problemas de depedencias
+
+------ FTP
+ftp localhost -> tenta se logar no ftp localhost
+(**vsftpd)
+
+------ Comandos Diversos
+ls NOME_DO_ARQUIVO | awk -F. '{ print $1 }' -> vem o nome do arquivo sem a extensao (-F. -> -F indica um campo delimitador -> nesse caso o . )
+$@ -> recupera todos os parametros passados pelo usuario
+$? -> pega o resultado de algum comando (0 = sucesso)
+-d NOME_DO_DIRETORIO -> verifica se o diretorio existe
+$(ALGUM COMANDO) -> sera executado este comando e pode ser armazenado em uma variavel num arquivo .shell
+date +%F -> data vem formatada YYYY-mm-DD
+date +%F,%H:%M:%S -> data vem formatada com YYYY-mm-DD Hora:Minuto:Segundo
+bc <<< OPERACAO_MATEMATICA (2*2 = 4)
+bc <<< "scale=2;OPERACAO_MATEMATICA"
+
+
+---- IF
+if [! -d NOME_DO_DIRETORIO] -> verifica se o diretorio nao existe (! negacao)
+then
+	mkdir NOME_DO_DIRETORIO
+else
+	ALGUMA_COISA
+fi -> fim to if
+
+---- FOR
+for NOME_DE_CADA_ITERACAO in LISTA_DE_VALORES () for image in *.jpg
+do
+	FACA_ALGO
+done
+
+---- Variaveis
+local NOME_DA_VARIAVEL -> define uma variavel como escopo local
+** mesmo uma variavel estando dentro de uma funcao, ela pode ser acessada de fora da funcao se nao possuir a definicao local no nome
+
+---- Funcoes
+NOME_DA_FUNCAO(){... CONTEUDO DA FUNCAO }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
