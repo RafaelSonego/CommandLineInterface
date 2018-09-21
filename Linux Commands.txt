@@ -80,6 +80,46 @@ sudo apt-get -f install -> resolve problemas de depedencias
 ftp localhost -> tenta se logar no ftp localhost
 (**vsftpd)
 
+------ IF
+if [! -d NOME_DO_DIRETORIO] -> verifica se o diretorio nao existe (! negacao)
+then
+	mkdir NOME_DO_DIRETORIO
+elif [ "test" == "test" ]
+then
+	echo "test"
+else
+	ALGUMA_COISA
+fi -> fim to if
+
+------ FOR
+for NOME_DE_CADA_ITERACAO in LISTA_DE_VALORES () for image in *.jpg
+do
+	FACA_ALGO
+done
+
+------ CASE
+case $1 in 
+		VALOR_X)
+		echo "faz alguma coisa x"
+		;;
+		VALOR_Y)
+		echo "faz alguma coisa y"
+		;;
+		VALOR_Z)
+		echo "faz alguma coisa z"
+		;;
+		*)
+		echo "faz alguma coisa default"
+		;;
+esac
+
+---- Variaveis
+local NOME_DA_VARIAVEL -> define uma variavel como escopo local
+** mesmo uma variavel estando dentro de uma funcao, ela pode ser acessada de fora da funcao se nao possuir a definicao local no nome
+
+---- Funcoes
+NOME_DA_FUNCAO(){... CONTEUDO DA FUNCAO }
+
 ------ Comandos Diversos
 ls NOME_DO_ARQUIVO | awk -F. '{ print $1 }' -> vem o nome do arquivo sem a extensao (-F. -> -F indica um campo delimitador -> nesse caso o . )
 $@ -> recupera todos os parametros passados pelo usuario
@@ -90,28 +130,11 @@ date +%F -> data vem formatada YYYY-mm-DD
 date +%F,%H:%M:%S -> data vem formatada com YYYY-mm-DD Hora:Minuto:Segundo
 bc <<< OPERACAO_MATEMATICA (2*2 = 4)
 bc <<< "scale=2;OPERACAO_MATEMATICA"
+\b([0-9]{1,3}\.){3}[0-9]{1,3}\b -> expressao regular IP
+parametro=$(echo "VALOR" | awk '{ print toupper($1) }') -> VALOR pode ser um parametro passado pelo usuario -> $1
 
 
----- IF
-if [! -d NOME_DO_DIRETORIO] -> verifica se o diretorio nao existe (! negacao)
-then
-	mkdir NOME_DO_DIRETORIO
-else
-	ALGUMA_COISA
-fi -> fim to if
 
----- FOR
-for NOME_DE_CADA_ITERACAO in LISTA_DE_VALORES () for image in *.jpg
-do
-	FACA_ALGO
-done
-
----- Variaveis
-local NOME_DA_VARIAVEL -> define uma variavel como escopo local
-** mesmo uma variavel estando dentro de uma funcao, ela pode ser acessada de fora da funcao se nao possuir a definicao local no nome
-
----- Funcoes
-NOME_DA_FUNCAO(){... CONTEUDO DA FUNCAO }
 
 
 
