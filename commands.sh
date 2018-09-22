@@ -1,27 +1,27 @@
 #!/bin/bash
 
 convert_image(){
-#vai para o caminha especificado
-cd /mnt/c/users/rafae/Desktop/ShellScript/imagens-livros
+	#vai para o caminha especificado
+	cd /mnt/c/users/rafae/Desktop/ShellScript/imagens-livros
 
-#-d verifica se o diretorio existe
-if [ ! -d png ]
-then
-	echo "criando o diretorio png"
-	mkdir png
-fi
+	#-d verifica se o diretorio existe
+	if [ ! -d png ]
+	then
+		echo "criando o diretorio png"
+		mkdir png
+	fi
 
-for imagem in *.jpg
-do
-	local nome_arquivo=$(ls $imagem | awk -F. '{print $1}')
-	#echo $nome_arquivo
-done
+	for imagem in *.jpg
+	do
+		local nome_arquivo=$(ls $imagem | awk -F. '{print $1}')
+		#echo $nome_arquivo
+	done
 
-#forcando um erro para testar o if
-cd /testeee
-
+	#forcando um erro para testar o if que verifica o status da execucao
+	cd /testeee
 }
 
+#Grava o retorno da funcao em um log -> 2 significa a saida de erro
 convert_image 2>> log.txt
 
 if [ $? -eq 0  ]
@@ -30,5 +30,4 @@ then
 else
 	echo "deu ruim!"
 fi 
-
 
